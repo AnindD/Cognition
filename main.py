@@ -5,9 +5,11 @@ import json
 import random 
 import math 
 import asyncio
+import random 
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
 from queepalive import keep_alive
+
 
 # Defines the bot and the commmand prefix 
 intents = discord.Intents.default()
@@ -157,52 +159,60 @@ async def PhysicsProblem(ctx):
       embed.set_footer(text="Not all solutions are step-by-step. Additionally sometimes there will be no question presented. This is simply a randomization error. Try the bot again until you get a proper problem.")
       await ctx.send(embed=embed)
     elif msg.content.startswith("Vector"):
-      from questionBank import VectorQuestions
-      from questionBank import VectorSolutions
-      question = random.randint(0,len(VectorQuestions)-1)
-      vector_Questions = ''.join(VectorQuestions[question-1:question])
-      vector_Solutions = ''.join(VectorSolutions[question-1:question])
+      from questionBank import VectorDictionary
+      vector_question = "".join(random.choice(list(VectorDictionary.keys())))
+      vector_solution = "".join(random.choice(list(VectorDictionary.values())))
       await sent.delete()
       await msg.delete()
       embed = discord.Embed(
         title = "Vector Problem",
-        description = (f"{vector_Questions}\n\nSolution: ||{vector_Solutions}||\nSource: PhysicsClassroom.com, Openstax.org"),
+        description = (f"{vector_question}\n\nSolution: ||{vector_solution}||\nSource: PhysicsClassroom.com, Openstax.org"),
         color=0x206694
       )
       embed.set_thumbnail(url="https://creaticals.com/wp-content/uploads/2021/09/Sabrina-berjalan.png")
       embed.set_footer(text="Not all solutions are step-by-step. Additionally sometimes there will be no question presented. This is simply a randomization error. Try the bot again until you get a proper problem.")
       await ctx.send(embed=embed)
     elif msg.content.startswith("Energy"):
-      from questionBank import EnergyQuestions
-      from questionBank import EnergySolutions
-      question = random.randint(0,len(EnergyQuestions)-1)
-      embed_Energy_Questions = ''.join(EnergyQuestions[question-1:question])
-      embed_Energy_Solutions = ''.join(EnergySolutions[question-1:question])
+      from questionBank import EnergyDictionary
+      energy_question  = "".join(random.choice(list(EnergyDictionary.keys())))
+      energy_solution  = "".join(random.choice(list(EnergyDictionary.values())))
       await sent.delete()
       await msg.delete()
       embed = discord.Embed(
         title="Energy Problem",
-        description = (f"{embed_Energy_Questions}\n\nSolution:||{embed_Energy_Solutions}||\nSource: Openstax.org"),
+        description = (f"{energy_question}\n\nSolution:||{energy_solution}||\nSource: Openstax.org"),
       )
       embed.set_thumbnail(url="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80")
       embed.set_footer(text="Not all solutions are step-by-step. Additionally sometimes there will be no question presented. This is simply a randomization error. Try the bot again until you get a proper problem.")
       await ctx.send(embed=embed)
     elif msg.content.startswith("Forces"): 
-      from questionBank import ForcesQuestions
-      from questionBank import ForcesSolutions 
-      question = random.randint(0,len(ForcesQuestions)-1)
-      embed_Forces_Questions = ''.join(ForcesQuestions[question-1:question])
-      embed_Forces_Solutions = ''.join(ForcesSolutions[question-1:question])
+      #  electricity_question = "".join(random.choice(list(ElectricityDictionary.keys())))
+      from questionBank import ForcesDictionary
+      forces_question  =  "".join(random.choice(list(ForcesDictionary.keys())))
+      forces_solution  =  "".join(random.choice(list(ForcesDictionary.values())))
       await sent.delete() 
       await msg.delete()
       embed = discord.Embed(
         title="Forces Problem",
-        description = (f"{embed_Forces_Questions}\n\nSolution:||{embed_Forces_Solutions}||\nSource: Openstax.org"),
+        description = (f"{forces_question}\n\nSolution:||{forces_solution}||\nSource: Openstax.org"),
         color=0x3498db
       )
       embed.set_thumbnail(url="https://d2r55xnwy6nx47.cloudfront.net/uploads/2020/06/Gravity_2880x1620_Lede.jpg")
       embed.set_footer(text="Not all solutions are step-by-step. Additionally sometimes there will be no question presented. This is simply a randomization error. Try the bot again until you get a proper problem.")
       await ctx.send(embed=embed)
+    elif msg.content.startswith("Electricity"):
+      from questionBank import ElectricityDictionary
+      electricity_question = "".join(random.choice(list(ElectricityDictionary.keys())))
+      eletricity_solution = "".join(random.choice(list(ElectricityDictionary.values())))
+      embed = discord.Embed (
+        title="Electricity Problem",
+        description = (f"{electricity_question}\nSolution:||{eletricity_solution}||\nSource: Openstax.org"), 
+        color=0x3498db        
+      )
+      embed.set_thumbnail(url="https://cdn.sparkfun.com/assets/9/8/d/5/4/519f9719ce395faa3c000000.jpg")
+      embed.set_footer(text="Not all solutions are step-by=step.")
+      await ctx.send(embed=embed)
+      
     else: 
       await sent.delete()
       await ctx.send("Invalid option.")  # If user fails to meet time limit, the embed will be deleted and user will have to re-do the command. 
@@ -228,7 +238,7 @@ async def on_message_delete(message):
 
 # If user wants to retrieve the stored message, then user can enter !Snipe. 
 @client.command()
-async def Snipe(ctx, member:discord.Member): 
+async def Snipe(ctx): 
   channel = ctx.channel
   embed = discord.Embed(
   title = "Snipe",
