@@ -160,13 +160,12 @@ async def PhysicsProblem(ctx):
       await ctx.send(embed=embed)
     elif msg.content.startswith("Vector"):
       from questionBank import VectorDictionary
-      vector_question = "".join(random.choice(list(VectorDictionary.keys())))
-      vector_solution = "".join(random.choice(list(VectorDictionary.values())))
+      vector_question = ("+".join(random.choice(list(VectorDictionary.items())))).split("+")
       await sent.delete()
       await msg.delete()
       embed = discord.Embed(
         title = "Vector Problem",
-        description = (f"{vector_question}\n\nSolution: ||{vector_solution}||\nSource: PhysicsClassroom.com, Openstax.org"),
+        description = (f"{vector_question[0]}\n\nSolution: ||{vector_question[1]}||\nSource: PhysicsClassroom.com, Openstax.org"),
         color=0x206694
       )
       embed.set_thumbnail(url="https://creaticals.com/wp-content/uploads/2021/09/Sabrina-berjalan.png")
@@ -351,6 +350,5 @@ async def on_member_join(member):
 async def on_member_remove(member):
   await member.send(f"Goodbye!")
   await client.process_commands(member)
-
 keep_alive()
 client.run(os.environ['TOKEN'])
