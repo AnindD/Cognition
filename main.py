@@ -143,16 +143,13 @@ async def PhysicsProblem(ctx):
     )
     # If message starts with [x topic] then it will refer to the database of physics questions and post them. 
     if msg.content.startswith("Kinematics"): 
-      from questionBank import PhysicsQuestions
-      from questionBank import Solutions
-      question = random.randint(0,len(PhysicsQuestions)-1)
-      kin_Questions = ''.join(PhysicsQuestions[question-1:question])
-      kin_Solutions = ''.join(Solutions[question-1:question])
+      from questionBank import KinematicsQuestions
+      kin_question = ("+".join(random.choice(list(KinematicsQuestions.items())))).split("+")
       await sent.delete()
       await msg.delete()
       embed = discord.Embed(
         title="Kinematics Problem",
-        description=(f"{kin_Questions}\n\nSolution: ||{kin_Solutions}||\nSource: Openstax.org"),
+        description=(f"{kin_question[0]}\n\nSolution: ||{kin_question[1]}||\nSource: Openstax.org"),
         color=0x9b59b6
       )
       embed.set_thumbnail(url="https://cdn.kastatic.org/googleusercontent/BO82YZEm2LGnHiU5RcqaKRltWAkf4MTXv-QcUCe09uVP2h-2FSWaYTzTtEHxhD2-sehTRstmwW1MdPpTI5aIKC4")
@@ -173,13 +170,12 @@ async def PhysicsProblem(ctx):
       await ctx.send(embed=embed)
     elif msg.content.startswith("Energy"):
       from questionBank import EnergyDictionary
-      energy_question  = "".join(random.choice(list(EnergyDictionary.keys())))
-      energy_solution  = "".join(random.choice(list(EnergyDictionary.values())))
+      energy_question= ("+".join(random.choice(list(EnergyDictionary.items())))).split("+")
       await sent.delete()
       await msg.delete()
       embed = discord.Embed(
         title="Energy Problem",
-        description = (f"{energy_question}\n\nSolution:||{energy_solution}||\nSource: Openstax.org"),
+        description = (f"{energy_question[0]}\n\nSolution:||{energy_question[1]}||\nSource: Openstax.org"),
       )
       embed.set_thumbnail(url="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80")
       embed.set_footer(text="Not all solutions are step-by-step. Additionally sometimes there will be no question presented. This is simply a randomization error. Try the bot again until you get a proper problem.")
@@ -187,13 +183,12 @@ async def PhysicsProblem(ctx):
     elif msg.content.startswith("Forces"): 
       #  electricity_question = "".join(random.choice(list(ElectricityDictionary.keys())))
       from questionBank import ForcesDictionary
-      forces_question  =  "".join(random.choice(list(ForcesDictionary.keys())))
-      forces_solution  =  "".join(random.choice(list(ForcesDictionary.values())))
+      forces_question = ("+".join(random.choice(list(ForcesDictionary.items())))).split("+")
       await sent.delete() 
       await msg.delete()
       embed = discord.Embed(
         title="Forces Problem",
-        description = (f"{forces_question}\n\nSolution:||{forces_solution}||\nSource: Openstax.org"),
+        description = (f"{forces_question[0]}\n\nSolution:||{forces_question[1]}||\nSource: Openstax.org"),
         color=0x3498db
       )
       embed.set_thumbnail(url="https://d2r55xnwy6nx47.cloudfront.net/uploads/2020/06/Gravity_2880x1620_Lede.jpg")
@@ -201,11 +196,10 @@ async def PhysicsProblem(ctx):
       await ctx.send(embed=embed)
     elif msg.content.startswith("Electricity"):
       from questionBank import ElectricityDictionary
-      electricity_question = "".join(random.choice(list(ElectricityDictionary.keys())))
-      eletricity_solution = "".join(random.choice(list(ElectricityDictionary.values())))
+      electricity_question = ("+".join(random.choice(list(ElectricityDictionary.items())))).split("+")
       embed = discord.Embed (
         title="Electricity Problem",
-        description = (f"{electricity_question}\nSolution:||{eletricity_solution}||\nSource: Openstax.org"), 
+        description = (f"{electricity_question[0]}\nSolution:||{electricity_question[1]}||\nSource: Openstax.org"), 
         color=0x3498db        
       )
       embed.set_thumbnail(url="https://cdn.sparkfun.com/assets/9/8/d/5/4/519f9719ce395faa3c000000.jpg")
@@ -336,8 +330,9 @@ async def unmuteError(ctx, error):
 async def on_message(message):
   channel = message.channel 
   if message.author == client.user: 
-    return 
-  if message.content.startswith("Fuck"):
+    return
+  swear_word = message.content.upper() 
+  if swear_word == "FUCK":
     await channel.send("Don't say bad words. ")
   await client.process_commands(message)
 
