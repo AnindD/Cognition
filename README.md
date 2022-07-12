@@ -1,7 +1,19 @@
 # Mike and Anindit's Discord Bot 
-Coding project where we created a discord bot on Python with the help of the Discord API Manuel and Discord.py library (all resources will be posted below). Project was done on Replit IDE. 
+Project Summary: Created a Discord bot geared towards helping students (particularly our age) with their academics and other tasks related to school. Some features include: Random physics problem generator, math problem generator, calculator, homework help and moderator tools. 
 
-*Please note, some of this code is quite inefficient and sometimes it may be updated. I will only update the github file probably once every week or so. 
+Why: There are few bots related to helping schoolwork and homework. Therefore, the goal of this project was to fill the gap ourselves and automate/efficiently organize the way we study. 
 
-# Resources
+Motivation: The primary motivation of this project was to improve our knowledge of Python and working with the Discord API. 
+
+# Technologies Used 
+- Python 
+- Discord API 
+- Flask (hosting Disord bot) 
+
+# Resources/Documentation 
+Documentation which helped create the bot: 
 1. https://discordpy.readthedocs.io/en/stable/api.html
+2. https://discord.com/developers/docs/intro
+
+# Credits
+Programmers: Mike Xu and Anindit Dewan 
