@@ -6,9 +6,9 @@ Why: There are few bots related to helping schoolwork and homework. Therefore, t
 Motivation: The primary motivation of this project was to improve our knowledge of Python and working with the Discord API. 
 
 # Technologies Used 
-- Python 
-- Discord API 
-- Flask (hosting Disord bot) 
+- Python - Programming language used 
+- Discord API - API which connects code to Discord 
+- Flask & Uptime Robot: Hosts bot permanently 
 
 # Resources/Documentation 
 Documentation which helped create the bot: 
@@ -17,3 +17,4 @@ Documentation which helped create the bot:
 
 # Credits
 Programmers: Mike Xu and Anindit Dewan 
+Hosting: Arsal Abrar 
