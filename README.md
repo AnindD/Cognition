@@ -16,5 +16,5 @@ Documentation which helped create the bot:
 2. https://discord.com/developers/docs/intro
 
 # Credits
-- Programmers: Mike Xu and Anindit Dewan 
+- Programming: Mike Xu and Anindit Dewan 
 - Hosting: Arsal Abrar 
