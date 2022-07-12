@@ -1,5 +1,5 @@
 # Mike and Anindit's Discord Bot 
-**Project Summary:** Created a Discord bot geared towards helping students (particularly our age) with their academics and other tasks related to school. Some features include: Random physics problem generator, math problem generator, calculator, homework help and moderator tools. 
+**Project Summary:** Created a Discord bot geared towards helping students (particularly our age) with their academics and other tasks related to school. Some features include: Random physics problem generator, math problem generator, calculator, concept review and moderator tools. 
 
 **Why Build It?** There are few bots related to helping schoolwork and homework. Therefore, the goal of this project was to fill the gap ourselves and automate/efficiently organize the way we study. 
 
@@ -17,4 +17,4 @@ Documentation which helped create the bot:
 
 # Credits
 Programmers: Mike Xu and Anindit Dewan 
-Hosting: Arsal Abrar 
+\nHosting: Arsal Abrar 
