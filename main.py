@@ -10,10 +10,13 @@ from discord.ext.commands import has_permissions, MissingPermissions
 from queepalive import keep_alive
 from dotenv import load_dotenv
 from sympy import *
+from questionBank import KinematicsQuestions
+from questionBank import VectorDictionary
+from questionBank import EnergyDictionary
+from questionBank import ForcesDictionary
+from questionBank import ElectricityDictionary
+
 load_dotenv()
-
-
-
 # Defines the bot and the commmand prefix 
 intents = discord.Intents.default()
 intents.members = True 
@@ -26,26 +29,15 @@ async def on_ready():
   await client.change_presence(status=discord.Status.dnd, activity=discord.Game("!Help to start."))
   print("We have logged in as {0.user}".format(client))
   
-# Test command, exclusively used for testing a particular module of a command, instead of running the whole command itself. 
-@client.command()
-async def Database(ctx):
-  embed = discord.Embed(
-    title="Sample Title",
-    description="BlahBlahBlah",
-  )
-  embed.set_image(url="https://cdn.pixabay.com/photo/2017/01/08/13/58/cube-1963036__340.jpg")
-  await ctx.send(embed=embed)
-
-swear_words = ["FUCK", "SHIT", "ASS", "PRICK"]
-  
 # !Help - list of commands of the bot. 
 @client.command()
 async def Help(ctx):
   embed = discord.Embed(
     title="Help", 
-    description="!About - Description and function of discord bot.\n!DM- Do you want the bot to send a message to someone? Use this command!\n!Calculator - Mathematical operations\n!Snipe - Snipes a message that was deleted\n!PhysicsProblem - Generate a physics problem to study from.\n!Snipe - Snipes a message that a user recently deletes (120 seconds)\n!Kick and !Ban - Kick or ban user from a server (only allowed if you have manage role permissions).\n!Permamute - Permanently mute someone.\n!Mute - Mute someone for a given period of time (must specify time as a parameter)\nUnmute - Unmute a person.\nIf you would like any additional features added to the bot please message Anindit (DrPraeclarum#8474) or Mike (Mook#3470) and it'll be done. This bot is currently under construction, so there will be a lack of features currently. ", 
+    description="**__GENERAL__**\n !About - Description and biography of the bot\n !Help - Bot help\n **__MATH__**\n !Calculator - Mathematical operations\n !Quadratic - Solve quadratic factors based on user input\n !Simul - Solve system of equations based on user input\n **__CHEMISTRY__**\n !Chemconv - Chemistry conversions\n !Chembalancer - Chemical equation balancer [COMING SOON]\n **__PHYSICS__**\n !PhysicsProblem - Randomly generates physics problems based on subject inputted\n !Physicsconv - Physics conversions [COMING SOON]\n **__FRENCH__**\n !Translate - Translates text[COMING SOON]\n **__MOD COMMANDS__**\n !Mute - Mutes users\n !Kick - Kicks users\n !Ban - Bans users\n !Snipe - Uncover deleted messages\n **__FUN COMMANDS__**\n !DM - Dm a friend a private message\n !Pingloop - Mass ping someone based on user inputted number",
     color=800080
   )
+  embed.set_image(url="https://media.discordapp.net/attachments/809524377501564948/997634454891802795/unknown.png")
   await ctx.send(embed=embed)
 
 # About. Embed gives information about the authors, how the bot was made, etc. 
@@ -127,18 +119,72 @@ async def Tan(ctx, x:float):
   tan = lambda x: math.tan(math.radians(x))
   await ctx.send(tan(x))
 
+@client.command()
+async def Chemconv(ctx):
+  embed = discord.Embed(
+    title="Chemistry Conversion",
+    description=("Welcome to chemistry conversions, please type in the value you want to convert.\nYou will be given the option of what units you want to convert later."),
+    color=0xe67e22
+  )
+  embed.set_thumbnail(url="https://as1.ftcdn.net/v2/jpg/00/65/59/50/1000_F_65595070_yu9z2Z1Nd4oUSQxpeJHwiZu6y8yKDTq2.jpg")
+  embed.set_footer(text="For mass to mole and mole to mass include molar mass. (i.e. '45 12' for 45 grams of carbon.")
+  chem_conversion_embed = await ctx.send(embed=embed)
+  try: 
+    chem_conversion_input = await client.wait_for(
+      "message", 
+      timeout=30,
+      check=lambda message: message.author == ctx.author and message.channel == ctx.channel
+    )
+    await chem_conversion_embed.delete()
+    embed = discord.Embed(
+        title="Units",
+        description=("Unit list, type the number corresponding to the conversion\n1 - Mass (grams) to Mole\n2 - Mole to Mass (grams)\n3- Gram to Kilogram\n4 - Kilogram to Gram\n5 - Celsius to Kelvin\n6- Kelvin to Celsius")
+      )
+    unit_conversion_embed = await ctx.send(embed=embed)
+    try: 
+      unit_conversion_input = await client.wait_for(
+      "message", 
+      timeout=30,
+      check=lambda message: message.author == ctx.author and message.channel == ctx.channel
+      )
+      if unit_conversion_input.content == "1":
+        chem_conversion_table = chem_conversion_input.content.split(" ")
+        mass_to_mole = lambda chem_conversion_table: (int(chem_conversion_table[0]) / int(chem_conversion_table[1]))
+        await ctx.send(mass_to_mole(chem_conversion_table))
+      elif unit_conversion_input.content == "2": 
+        chem_conversion_table = chem_conversion_input.content.split(" ")
+        mole_to_mass = lambda chem_conversion_table: (int(chem_conversion_table[0]) * int(chem_conversion_table[1]))
+        await ctx.send(mole_to_mass(chem_conversion_table))
+      elif unit_conversion_input.content == "3": 
+        await ctx.send(str(int(chem_conversion_input.content) / 1000))
+      elif unit_conversion_input.content == "4":
+        await ctx.send(str(int(chem_conversion_input.content) * 1000))
+      elif unit_conversion_input.content == "5": 
+        await ctx.send(str(int(chem_conversion_input.content) + 273.15))
+      elif unit_conversion_input.content == "6": 
+        await ctx.send(str(int(chem_conversion_input.content) - 273.15))
+    except asyncio.TimeoutError: 
+      await unit_conversion_embed.delete() 
+      await ctx.send("TOO LATE SUBMIT AGAIN")
+  except asyncio.TimeoutError: 
+    await chem_conversion_embed.delete() 
+    await ctx.send("TOO LATE SUBMIT AGAIN")
+
 # Quadratic solver problem 
 @client.command() 
 async def Quadratic(ctx): 
   embed = discord.Embed(
     title="Quadratics Solver",
-    description=("Welcome to the quadratics solver. Simply type in your quadratic in this format:\nI.e. 4x^2 + 2x + 3 would be written as `4*x**2 + 2*x + 3`.\nEssentially, * will be a multiplication and ** will be an exponent.")
+    description=("Welcome to the quadratics solver. Simply type in your quadratic in this format:\nI.e. 4x^2 + 2x + 3 would be written as `4*x**2 + 2*x + 3`.\nEssentially, * will be a multiplication and ** will be an exponent."),
+    color=0xe74c3c
   )
+  embed.set_thumbnail(url="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Quadratic_roots.svg/1200px-Quadratic_roots.svg.png")
+  embed.set_footer(text="Please follow the format listed above.")
   quadratic_input_embed= await ctx.send(embed=embed)
   try: 
     quadratic_input = await client.wait_for(
       "message", 
-      timeout=15, 
+      timeout=40, 
       check=lambda message: message.author == ctx.author and message.channel == ctx.channel 
     )
     try: 
@@ -158,8 +204,11 @@ async def Quadratic(ctx):
 async def Simul(ctx): 
   embed = discord.Embed(
     title="Systems of Equations Solver", 
-    description=("Welcome to systems of equations solver. \nType **FIRST** equation (i.e. `4*x + 1 = 5`)")
+    description=("Welcome to systems of equations solver. \nType **FIRST** equation (i.e. `4*x + 1 = 5`)"),
+    color=0x992d22
   )
+  embed.set_thumbnail(url="https://i.ytimg.com/vi/Tkrqrfkznoo/maxresdefault.jpg")
+  embed.set_footer(text="Please follow the requested format, without the '`'")
   simul_input_embed = await ctx.send(embed=embed)
   try: 
     simul_input_1 = await client.wait_for(
@@ -195,7 +244,8 @@ async def Simul(ctx):
     result = list(result[0])
     await ctx.send(f"The value of x is {result[0]}\nthe value of y is {result[1]}")
   except Exception as e: 
-    await ctx.send(e)
+    await ctx.send("ERROR")
+    print(e)
   
 
 # Physics problem command. User will input what type of physics problem they would like and bot will generate problem and solution based on a random index generated by python.  
@@ -219,7 +269,6 @@ async def PhysicsProblem(ctx):
     )
     # If message starts with [x topic] then it will refer to the database of physics questions and post them. 
     if msg.content.startswith("Kinematics"): 
-      from questionBank import KinematicsQuestions
       kin_question = ("+".join(random.choice(list(KinematicsQuestions.items())))).split("+")
       await sent.delete()
       await msg.delete()
@@ -232,7 +281,6 @@ async def PhysicsProblem(ctx):
       embed.set_footer(text="Not all solutions are step-by-step. Additionally sometimes there will be no question presented. This is simply a randomization error. Try the bot again until you get a proper problem.")
       await ctx.send(embed=embed)
     elif msg.content.startswith("Vector"):
-      from questionBank import VectorDictionary
       vector_question = ("+".join(random.choice(list(VectorDictionary.items())))).split("+")
       await sent.delete()
       await msg.delete()
@@ -245,7 +293,6 @@ async def PhysicsProblem(ctx):
       embed.set_footer(text="Not all solutions are step-by-step. Additionally sometimes there will be no question presented. This is simply a randomization error. Try the bot again until you get a proper problem.")
       await ctx.send(embed=embed)
     elif msg.content.startswith("Energy"):
-      from questionBank import EnergyDictionary
       energy_question= ("+".join(random.choice(list(EnergyDictionary.items())))).split("+")
       await sent.delete()
       await msg.delete()
@@ -257,8 +304,7 @@ async def PhysicsProblem(ctx):
       embed.set_footer(text="Not all solutions are step-by-step. Additionally sometimes there will be no question presented. This is simply a randomization error. Try the bot again until you get a proper problem.")
       await ctx.send(embed=embed)
     elif msg.content.startswith("Forces"): 
-      #  electricity_question = "".join(random.choice(list(ElectricityDictionary.keys())))
-      from questionBank import ForcesDictionary
+      #  electricity_question = "".join(random.choice(list(ElectricityDictionary.keys()))
       forces_question = ("+".join(random.choice(list(ForcesDictionary.items())))).split("+")
       await sent.delete() 
       await msg.delete()
@@ -271,7 +317,6 @@ async def PhysicsProblem(ctx):
       embed.set_footer(text="Not all solutions are step-by-step. Additionally sometimes there will be no question presented. This is simply a randomization error. Try the bot again until you get a proper problem.")
       await ctx.send(embed=embed)
     elif msg.content.startswith("Electricity"):
-      from questionBank import ElectricityDictionary
       electricity_question = ("+".join(random.choice(list(ElectricityDictionary.items())))).split("+")
       embed = discord.Embed (
         title="Electricity Problem",
@@ -347,11 +392,6 @@ async def Pingloop(ctx, member: discord.Member = None):
       await ctx.send(member.mention)
       loop_Start = loop_Start + 1  
 
-@client.command() 
-async def Bank(ctx): 
-  
-  await ctx.send("$1000 has been sent to your bank account") 
-
 # Kick/Ban. Simple command which can kick and ban a member. 
 @client.command() 
 @has_permissions(manage_roles=True, kick_members=True)
@@ -418,6 +458,7 @@ async def unmuteError(ctx, error):
 # Events which will occur when user randomly does a particular action (for example, say "Goodbye").  
 # Simple event. Checks if user says a word and then replies. 
 """
+swear_words = ["FUCK", "SHIT", "ASS", "PRICK"]
 @client.event 
 async def on_message(message):
   channel = message.channel 
@@ -432,7 +473,7 @@ async def on_message(message):
 # On member join/remove. If a member joins and leaves, it will then send them a message inside their direct messages. 
 @client.event
 async def on_member_join(member):
-  await member.send(f"Welcome to the server, we hope you stay for a long period of time. ")
+  await member.send(f"Welcome to the server, we hope you stay forever.")
   await client.process_commands(member)
 @client.event
 async def on_member_remove(member):
