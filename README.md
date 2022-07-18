@@ -1,5 +1,28 @@
 # Mike and Anindit's Discord Bot 
-**Project Summary:** Created a Discord bot geared towards helping students (particularly our age) with their academics and other tasks related to school. Some features include: Random physics problem generator, math problem generator, calculator, concept review and moderator tools (i.e. ones which limit the amount of curse/swear words). 
+**Project Summary:** Created a Discord bot geared towards helping students (particularly our age) with their academics and other tasks related to school. Features are: 
+**GENERAL**
+!About - Description and biography of the bot
+!Help - Bot help
+**MATH**
+!Calculator - Mathematical operations
+!Quadratic - Solve quadratic factors based on user input
+!Simul - Solve system of equations based on user input
+**CHEMISTRY**
+!Chemconv - Chemistry conversions
+!Chembalancer - Chemical equation balancer [COMING SOON]
+**PHYSICS**
+!PhysicsProblem - Randomly generates physics problems based on subject inputted
+!Physicsconv - Physics conversions [COMING SOON]
+**FRENCH**
+!Translate - Translates text[ COMING SOON]
+**MOD COMMANDS**
+!Mute - Mutes users
+!Kick - Kicks users
+!Ban - Bans users
+!Snipe - Uncover deleted messages
+**FUN COMMANDS**
+!DM - Dm a friend a private message
+!Pingloop - Mass ping someone based on user inputted number
 
 **Why Build It?** There are few bots related to helping schoolwork and homework. Therefore, the goal of this project was to fill the gap ourselves and automate/efficiently organize the way we study. 
 
