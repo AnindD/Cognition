@@ -1,8 +1,8 @@
 # Mike and Anindit's Discord Bot 
-**Project Summary:** Created a Discord bot geared towards helping students (particularly our age) with their academics and other tasks related to school. Features are: 
-**GENERAL**
-!About - Description and biography of the bot
-!Help - Bot help
+**Project Summary:** Created a Discord bot geared towards helping students (particularly our age) with their academics and other tasks related to school. Features are:\n
+**GENERAL**\n
+!About - Description and biography of the bot\n
+!Help - Bot help\n
 **MATH**
 !Calculator - Mathematical operations
 !Quadratic - Solve quadratic factors based on user input
