@@ -8,7 +8,7 @@ Authors: Anindit Dewan and Mike Xu
 
 **Why Build It?** There are few bots related to helping schoolwork and homework. Therefore, the goal of this project was to fill the gap ourselves and automate/efficiently organize the way we study. 
 
-**Motivation:** The primary motivation of this project was to improve our knowledge of Python and working with the Discord API. This is the first "major"/large-scale propject I have worked on thus far. 
+**Motivation:** The primary motivation of this project was to improve our knowledge of Python and working with the Discord API. This is the first "major"/large-scale project I have worked on thus far. 
 
 # Technologies Used 
 - Python - Programming language used 
