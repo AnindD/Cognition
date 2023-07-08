@@ -1,5 +1,6 @@
-# Mike and Anindit's Discord Bot 
+# Cognition 
 Authors: Anindit Dewan and Mike Xu  
+![Cognition](https://www.deque.com/wp-content/uploads/2019/10/cognitive.png)
 # Description
 **Project Summary:** Created a Discord bot geared towards helping students (particularly our age) with their academics and other tasks related to school. Features are: <br />
 * Numerous tools to help students with their homework (i.e. quadratics solver, system of equations solver, unit conversions in chemistry and physics, etc.).
