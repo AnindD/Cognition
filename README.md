@@ -1,5 +1,5 @@
 # Cognition 
-Authors: Anindit Dewan and Mike Xu  
+Authors: Anindit Dewan
 ![Cognition](https://www.deque.com/wp-content/uploads/2019/10/cognitive.png)
 # Description
 **Project Summary:** Cognition is a discord bot geared towards helping students with their academics and other tasks related to school. Features are: <br />
